@@ -5,7 +5,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 import { useDebounce } from '../../hooks/useDebounce';
 import { Search, X } from 'lucide-react';
 
-const ProductList = () => {
+export default function ProductList () {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -224,4 +224,3 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;

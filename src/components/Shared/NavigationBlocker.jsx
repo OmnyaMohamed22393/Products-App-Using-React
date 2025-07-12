@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NavigationBlocker = ({ blocker }) => {
+export default function NavigationBlocker ({ blocker }) {
   if (blocker.state !== 'blocked') return null;
 
   return (
@@ -35,4 +35,3 @@ const NavigationBlocker = ({ blocker }) => {
   );
 };
 
-export default NavigationBlocker;

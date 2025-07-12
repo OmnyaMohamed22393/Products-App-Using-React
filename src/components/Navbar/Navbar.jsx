@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { ShoppingCart, User, LogOut, Menu, X, Heart } from 'lucide-react';
 
-const Navbar = () => {
+export default function Navbar () {
   const { isAuthenticated, user, logout } = useAuth();
   const { items, getCartItemsCount, getCartTotal, removeFromCart } = useCart();
   const navigate = useNavigate();
@@ -276,4 +276,3 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;

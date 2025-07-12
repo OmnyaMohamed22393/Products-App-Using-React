@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoading } from '../../context/LoadingContext';
 
-const GlobalLoader = () => {
+export default function GlobalLoader () {
   const { isLoading } = useLoading();
 
   if (!isLoading) return null;
@@ -15,4 +15,4 @@ const GlobalLoader = () => {
   );
 };
 
-export default GlobalLoader;
+

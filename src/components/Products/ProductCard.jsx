@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { ShoppingCart, Heart, Star, Plus, Minus } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToWishlist, removeFromWishlist } from '../store/wishlistSlice';
 
-const ProductCard = ({ 
-  product, 
-  onShortlist, 
-  isShortlisted = false 
-}) => {
+export default function ProductCard ({ product }) {
   const { addToCart, items } = useCart();
   const { isAuthenticated } = useAuth();
   const [quantity, setQuantity] = useState(1);
+
+  const dispatch = useDispatch();
+  const wishlist = useSelector(state => state.wishlist);
+  const isShortlisted = wishlist.some(item => item.id === product.id);
 
   const cartItem = items.find(item => item.product.id === product.id);
   const availableStock = product.stock - (cartItem?.quantity || 0);
@@ -31,8 +33,10 @@ const ProductCard = ({
   };
 
   const handleShortlist = () => {
-    if (onShortlist) {
-      onShortlist(product.id);
+    if (isShortlisted) {
+      dispatch(removeFromWishlist(product.id));
+    } else {
+      dispatch(addToWishlist(product));
     }
   };
 
@@ -53,13 +57,13 @@ const ProductCard = ({
             <Heart size={16} fill={isShortlisted ? 'currentColor' : 'none'} />
           </button>
         </div>
-        
+
         <div className="card-body d-flex flex-column">
           <h5 className="card-title text-truncate">{product.title}</h5>
           <p className="card-text text-muted small flex-grow-1">
             {product.description.substring(0, 100)}...
           </p>
-          
+
           <div className="d-flex align-items-center mb-2">
             <div className="d-flex align-items-center me-3">
               <Star size={16} className="text-warning me-1" fill="currentColor" />
@@ -67,7 +71,7 @@ const ProductCard = ({
             </div>
             <span className="small text-muted">Stock: {product.stock}</span>
           </div>
-          
+
           <div className="d-flex justify-content-between align-items-center mb-3">
             <div>
               <span className="h5 text-success mb-0">${product.price}</span>
@@ -78,7 +82,7 @@ const ProductCard = ({
               )}
             </div>
           </div>
-          
+
           {isAuthenticated && (
             <div className="mb-3">
               <div className="input-group input-group-sm">
@@ -109,7 +113,7 @@ const ProductCard = ({
               </div>
             </div>
           )}
-          
+
           <div className="d-flex gap-2">
             <Link
               to={`/products/${product.id}`}
@@ -117,7 +121,7 @@ const ProductCard = ({
             >
               View Details
             </Link>
-            
+
             {isAuthenticated ? (
               <button
                 className="btn btn-primary btn-sm flex-grow-1"
@@ -136,7 +140,7 @@ const ProductCard = ({
               </Link>
             )}
           </div>
-          
+
           {isInCart && (
             <div className="mt-2">
               <span className="badge bg-success">
@@ -150,4 +154,3 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;

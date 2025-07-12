@@ -13,6 +13,7 @@ import Register from './components/Auth/Register';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
 import GlobalLoader from './components/Shared/GlobalLoader';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Wishlist from './components/Products/Wishlist';
 
 const RootLayout = () => {
   const { setLoading } = useLoading();
@@ -72,6 +73,14 @@ const router = createBrowserRouter([
         )
       },
       {
+        path: "wishlist",
+        element: (
+          <ProtectedRoute>
+            <Wishlist />
+          </ProtectedRoute>
+        )
+      },
+      {
         path: "login",
         element: (
           <AuthRedirectWrapper>
@@ -95,7 +104,7 @@ const router = createBrowserRouter([
   }
 ]);
 
-const App = () => {
+export default function App () {
   return (
     <LoadingProvider>
       <RouterProvider router={router} />
@@ -103,4 +112,3 @@ const App = () => {
   );
 };
 
-export default App;

@@ -8,7 +8,7 @@ import { useFormChangeDetection } from '../../hooks/useFormChangeDetection';
 import NavigationBlocker from '../Shared/NavigationBlocker';
 import { Eye, EyeOff } from 'lucide-react';
 
-const Register = () => {
+export default function Register () {
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -316,4 +316,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+

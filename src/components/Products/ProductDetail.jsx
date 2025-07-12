@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 import { ShoppingCart, ArrowLeft, Star, Plus, Minus } from 'lucide-react';
 
-const ProductDetail = () => {
+export default function ProductDetail () {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart, items } = useCart();
@@ -195,4 +195,3 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;

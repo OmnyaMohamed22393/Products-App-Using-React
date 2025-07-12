@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import { loginSchema } from '../../utils/validationSchemas';
 import { Eye, EyeOff } from 'lucide-react';
 
-const Login = () => {
+export default function Login () {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -122,4 +122,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+

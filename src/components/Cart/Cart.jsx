@@ -3,7 +3,7 @@ import { useCart } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 
-const Cart = () => {
+export default function Cart () {
   const { items, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
 
   if (items.length === 0) {
@@ -132,4 +132,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+
